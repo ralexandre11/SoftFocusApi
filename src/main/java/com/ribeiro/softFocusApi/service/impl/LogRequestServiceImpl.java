@@ -31,14 +31,14 @@ public class LogRequestServiceImpl implements LogRequestService {
 	public LogRequest Save(ResponseWeatherDTO weatherDTO) {
 		checkWeatherDTO(weatherDTO);
 		
-		Double tempCelcius
+		Double tempCelcius = weatherDTO.getMain().getTemp() - 273.0; 
 		LogRequest logRequest = new LogRequest();
 		logRequest.setDate(new Date());
 		logRequest.setCity(weatherDTO.getCity());
 		logRequest.setLon(weatherDTO.getCoord().getLon());
 		logRequest.setLat(weatherDTO.getCoord().getLat());
-		logRequest.setTemp(weatherDTO.getMain().getTemp());
-		logRequest.setGenre(verifyGenre(weatherDTO.getMain().getTemp()));
+		logRequest.setTemp(tempCelcius);
+		logRequest.setGenre(verifyGenre(tempCelcius));
 		
 		return repository.save(logRequest);
 	}
@@ -49,13 +49,18 @@ public class LogRequestServiceImpl implements LogRequestService {
 		}
 	}
 	
-	private String verifyGenre(Double temp) {
+	public String verifyGenre(Double temp) {
 		String genre = new String();
-		
 		Double tempCelcius = temp - 273.0;
 		
 		if (tempCelcius > 30.0) {
-			gen
+			genre = "party";
+		} else if (tempCelcius > 15.0) {
+			genre = "pop";
+		} else if (tempCelcius > 10.0) {
+			genre = "rock";
+		} else {
+			genre = "classical";
 		}
 		return genre;
 	}

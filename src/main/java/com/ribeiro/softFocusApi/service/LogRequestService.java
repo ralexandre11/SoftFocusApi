@@ -10,5 +10,7 @@ public interface LogRequestService {
 	List<LogRequest> all();
 	
 	LogRequest Save(ResponseWeatherDTO weatherDTO);
+	
+	String verifyGenre(Double temp);
 
 }

@@ -19,8 +19,6 @@ public class OpenWeatherMapsServiceImpl implements OpenWeatherMapsService {
 		ResponseWeatherDTO responseDTO = restTemplate.getForObject(url, ResponseWeatherDTO.class, city);
 
 		System.out.println(responseDTO);
-		
-		
 				
 		return responseDTO;
 	}
