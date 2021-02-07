@@ -1,9 +1,9 @@
 package com.ribeiro.softFocusApi.service;
 
-import com.ribeiro.softFocusApi.model.resouce.dto.CityWeatherDTO;
+import com.ribeiro.softFocusApi.model.resouce.dto.ResponseWeatherDTO;
 
 public interface OpenWeatherMapsService {
 
-	CityWeatherDTO callOpenweathermapAPI(String city);
+	ResponseWeatherDTO callOpenweathermapAPI(String city);
 	
 }

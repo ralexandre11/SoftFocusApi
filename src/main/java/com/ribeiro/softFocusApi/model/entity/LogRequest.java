@@ -44,7 +44,10 @@ public class LogRequest implements Serializable {
 	private String lat;
 	
 	@Column(name = "temp")
-	private String temp;
+	private Double temp;
+	
+	@Column(name = "humidity")
+	private Integer humidity;
 
 	@Column(name = "genre")
 	private String genre;

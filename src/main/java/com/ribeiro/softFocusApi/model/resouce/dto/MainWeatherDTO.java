@@ -4,19 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CityWeatherDTO {
+@ToString
+public class MainWeatherDTO {
+
+	private Double temp;
+	private Integer humidity;
 	
-		private String city;
-
-		private String lon;
-
-		private String lat;
-		
-		private String temp;
-
 }
