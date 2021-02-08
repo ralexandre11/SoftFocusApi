@@ -13,6 +13,13 @@ import com.ribeiro.softFocusApi.service.LogRequestService;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Classe responsável por disponibilizar o endpoint /api/logrequest
+ * Chamada: http://localhost:8080/api/logrequest
+ * 
+ * @author Ricardo Ribeiro
+ * @since 07/02/2021 
+ */
 @RestController
 @RequestMapping(value = "/api/logrequest")
 @RequiredArgsConstructor

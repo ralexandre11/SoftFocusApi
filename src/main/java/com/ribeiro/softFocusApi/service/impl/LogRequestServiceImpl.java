@@ -49,9 +49,8 @@ public class LogRequestServiceImpl implements LogRequestService {
 		}
 	}
 	
-	public String verifyGenre(Double temp) {
+	public String verifyGenre(Double tempCelcius) {
 		String genre = new String();
-		Double tempCelcius = temp - 273.0;
 		
 		if (tempCelcius > 30.0) {
 			genre = "party";
