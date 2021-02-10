@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ribeiro.softFocusApi.exception.PersonalException;
 import com.ribeiro.softFocusApi.model.entity.LogRequest;
-import com.ribeiro.softFocusApi.model.exception.PersonalException;
 import com.ribeiro.softFocusApi.model.repository.LogRequestRepository;
-import com.ribeiro.softFocusApi.model.resouce.dto.WeatherResponseDTO;
+import com.ribeiro.softFocusApi.resouce.dto.WeatherResponseDTO;
 import com.ribeiro.softFocusApi.service.LogRequestService;
 
 @Service

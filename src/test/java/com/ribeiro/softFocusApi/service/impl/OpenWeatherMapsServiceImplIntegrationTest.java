@@ -3,7 +3,7 @@ package com.ribeiro.softFocusApi.service.impl;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.ribeiro.softFocusApi.model.resouce.dto.WeatherResponseDTO;
+import com.ribeiro.softFocusApi.resouce.dto.WeatherResponseDTO;
 
 public class OpenWeatherMapsServiceImplIntegrationTest {
 	

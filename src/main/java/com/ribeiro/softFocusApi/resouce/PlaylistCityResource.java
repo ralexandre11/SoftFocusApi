@@ -1,4 +1,4 @@
-package com.ribeiro.softFocusApi.model.resouce;
+package com.ribeiro.softFocusApi.resouce;
 
 import java.util.List;
 
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ribeiro.softFocusApi.model.entity.LogRequest;
 import com.ribeiro.softFocusApi.model.repository.LogRequestRepository;
-import com.ribeiro.softFocusApi.model.resouce.dto.SpotifyItemDTO;
-import com.ribeiro.softFocusApi.model.resouce.dto.WeatherResponseDTO;
+import com.ribeiro.softFocusApi.resouce.dto.SpotifyItemDTO;
+import com.ribeiro.softFocusApi.resouce.dto.WeatherResponseDTO;
 import com.ribeiro.softFocusApi.service.LogRequestService;
 import com.ribeiro.softFocusApi.service.OpenWeatherMapsService;
 import com.ribeiro.softFocusApi.service.SpotifyApiService;

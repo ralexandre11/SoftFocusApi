@@ -5,10 +5,10 @@ import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.ribeiro.softFocusApi.model.resouce.dto.SpotifyAlbumDTO;
-import com.ribeiro.softFocusApi.model.resouce.dto.SpotifyRecomendationDTO;
-import com.ribeiro.softFocusApi.model.resouce.dto.SpotifyTokenDTO;
-import com.ribeiro.softFocusApi.model.resouce.dto.SpotifyTrackDTO;
+import com.ribeiro.softFocusApi.resouce.dto.SpotifyAlbumDTO;
+import com.ribeiro.softFocusApi.resouce.dto.SpotifyRecomendationDTO;
+import com.ribeiro.softFocusApi.resouce.dto.SpotifyTokenDTO;
+import com.ribeiro.softFocusApi.resouce.dto.SpotifyTrackDTO;
 import com.ribeiro.softFocusApi.service.impl.SpotifyApiServiceImpl;
 
 public class SpotifyServiceTest {

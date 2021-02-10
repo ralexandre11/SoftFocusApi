@@ -1,4 +1,4 @@
-package com.ribeiro.softFocusApi.model.resouce.dto;
+package com.ribeiro.softFocusApi.resouce.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,9 +11,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class WeatherMainDTO {
+public class WeatherCoordDTO {
 
-	private Double temp;
-	private Integer humidity;
+	private String lon;
+	private String lat;
 	
 }

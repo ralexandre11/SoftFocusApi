@@ -1,4 +1,4 @@
-package com.ribeiro.softFocusApi.model.resouce.dto;
+package com.ribeiro.softFocusApi.resouce.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

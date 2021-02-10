@@ -1,4 +1,4 @@
-package com.ribeiro.softFocusApi.model.resouce;
+package com.ribeiro.softFocusApi.resouce;
 
 import java.util.List;
 

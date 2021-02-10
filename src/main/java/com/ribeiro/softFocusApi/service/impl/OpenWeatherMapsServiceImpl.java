@@ -3,7 +3,7 @@ package com.ribeiro.softFocusApi.service.impl;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.ribeiro.softFocusApi.model.resouce.dto.WeatherResponseDTO;
+import com.ribeiro.softFocusApi.resouce.dto.WeatherResponseDTO;
 import com.ribeiro.softFocusApi.service.OpenWeatherMapsService;
 
 @Service

@@ -2,10 +2,10 @@ package com.ribeiro.softFocusApi.service;
 
 import java.util.List;
 
-import com.ribeiro.softFocusApi.model.resouce.dto.SpotifyAlbumDTO;
-import com.ribeiro.softFocusApi.model.resouce.dto.SpotifyItemDTO;
-import com.ribeiro.softFocusApi.model.resouce.dto.SpotifyRecomendationDTO;
-import com.ribeiro.softFocusApi.model.resouce.dto.SpotifyTokenDTO;
+import com.ribeiro.softFocusApi.resouce.dto.SpotifyAlbumDTO;
+import com.ribeiro.softFocusApi.resouce.dto.SpotifyItemDTO;
+import com.ribeiro.softFocusApi.resouce.dto.SpotifyRecomendationDTO;
+import com.ribeiro.softFocusApi.resouce.dto.SpotifyTokenDTO;
 
 public interface SpotifyApiService {
 

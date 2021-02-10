@@ -1,4 +1,4 @@
-package com.ribeiro.softFocusApi.model.exception;
+package com.ribeiro.softFocusApi.exception;
 
 public class PersonalException extends RuntimeException {
 
