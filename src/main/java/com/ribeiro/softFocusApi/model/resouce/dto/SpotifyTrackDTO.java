@@ -1,4 +1,4 @@
-package com.ribeiro.spotify.api.dto;
+package com.ribeiro.softFocusApi.model.resouce.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -13,9 +13,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Track {
+public class SpotifyTrackDTO {
 
     @JsonProperty("album")
-    private Album album;
+    private SpotifyAlbumDTO album;
     
 }

@@ -11,8 +11,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class CallBackDTO {
+public class WeatherCoordDTO {
 
-	private String code;
+	private String lon;
+	private String lat;
 	
 }

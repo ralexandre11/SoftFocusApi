@@ -1,6 +1,4 @@
-package com.ribeiro.spotify.api.dto;
-
-import java.util.List;
+package com.ribeiro.softFocusApi.model.resouce.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -15,9 +13,15 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Recomendation {
+public class WeatherResponseDTO {
+	
+	@JsonProperty("name")
+	private String city;
 
-    @JsonProperty("tracks")
-    private List<Track> tracks = null;
+	@JsonProperty("coord")
+	private WeatherCoordDTO coord;
 
+	@JsonProperty("main")
+	private WeatherMainDTO main;
+		
 }

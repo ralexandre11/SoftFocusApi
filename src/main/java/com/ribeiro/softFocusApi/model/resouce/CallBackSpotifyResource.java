@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ribeiro.spotify.api.dto.Token;
-import com.ribeiro.spotify.api.service.SpotifyApiServiceImpl;
+import com.ribeiro.softFocusApi.model.resouce.dto.SpotifyTokenDTO;
+import com.ribeiro.softFocusApi.service.impl.SpotifyApiServiceImpl;
 
 import lombok.RequiredArgsConstructor;
 
@@ -28,9 +28,9 @@ public class CallBackSpotifyResource {
 	
 //	@RequestMapping(value = "/{code}", method = RequestMethod.GET)
 	@GetMapping
-	public ResponseEntity<Token> callback(@RequestParam(defaultValue = "empty") String code) {
+	public ResponseEntity<SpotifyTokenDTO> callback(@RequestParam(defaultValue = "empty") String code) {
 		
-		Token token = new Token();
+		SpotifyTokenDTO token = new SpotifyTokenDTO();
 		
 //		System.out.printf("Code: %s", code);
 //		System.out.printf("Token: %s", token);

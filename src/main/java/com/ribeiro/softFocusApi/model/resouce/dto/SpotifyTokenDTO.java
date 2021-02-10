@@ -1,4 +1,4 @@
-package com.ribeiro.spotify.api.dto;
+package com.ribeiro.softFocusApi.model.resouce.dto;
 
 import java.util.Date;
 
@@ -15,7 +15,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Token {
+public class SpotifyTokenDTO {
 	
 	@JsonProperty("access_token")
 	private String accessToken;

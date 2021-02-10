@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ribeiro.softFocusApi.model.entity.LogRequest;
 import com.ribeiro.softFocusApi.model.exception.PersonalException;
 import com.ribeiro.softFocusApi.model.repository.LogRequestRepository;
-import com.ribeiro.softFocusApi.model.resouce.dto.ResponseWeatherDTO;
+import com.ribeiro.softFocusApi.model.resouce.dto.WeatherResponseDTO;
 import com.ribeiro.softFocusApi.service.LogRequestService;
 
 @Service
@@ -28,7 +28,7 @@ public class LogRequestServiceImpl implements LogRequestService {
 
 	@Override
 	@Transactional
-	public LogRequest Save(ResponseWeatherDTO weatherDTO) {
+	public LogRequest Save(WeatherResponseDTO weatherDTO) {
 		checkWeatherDTO(weatherDTO);
 		
 		Double tempCelcius = weatherDTO.getMain().getTemp() - 273.0; 
@@ -43,7 +43,7 @@ public class LogRequestServiceImpl implements LogRequestService {
 		return repository.save(logRequest);
 	}
 
-	private void checkWeatherDTO(ResponseWeatherDTO weatherDTO) {
+	private void checkWeatherDTO(WeatherResponseDTO weatherDTO) {
 		if (weatherDTO.getCity() == null) {
 			throw new PersonalException("Cidade não localizada!");
 		}
@@ -63,5 +63,7 @@ public class LogRequestServiceImpl implements LogRequestService {
 		}
 		return genre;
 	}
+	
+	
 	
 }

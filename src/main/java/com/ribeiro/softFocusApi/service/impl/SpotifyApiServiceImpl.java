@@ -1,7 +1,7 @@
-package com.ribeiro.spotify.api.service;
+package com.ribeiro.softFocusApi.service.impl;
 
 import java.util.Base64;
-import java.util.Date;
+import java.util.List;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -14,11 +14,12 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
-import com.ribeiro.spotify.api.dto.Album;
-import com.ribeiro.spotify.api.dto.Recomendation;
-import com.ribeiro.spotify.api.dto.Token;
-
-import lombok.NoArgsConstructor;
+import com.ribeiro.softFocusApi.model.resouce.dto.SpotifyAlbumDTO;
+import com.ribeiro.softFocusApi.model.resouce.dto.SpotifyItemDTO;
+import com.ribeiro.softFocusApi.model.resouce.dto.SpotifyRecomendationDTO;
+import com.ribeiro.softFocusApi.model.resouce.dto.SpotifyTokenDTO;
+import com.ribeiro.softFocusApi.model.resouce.dto.SpotifyTrackDTO;
+import com.ribeiro.softFocusApi.service.SpotifyApiService;
 
 /**
  * Classe que implementa a API do Spotfy (https://developer.spotify.com/documentation/web-api/)
@@ -32,7 +33,7 @@ public class SpotifyApiServiceImpl implements SpotifyApiService {
 	
 //	private static SpotifyApiImpl unique;
 	
-	private Token token;
+	private SpotifyTokenDTO token;
 	
 	private final static String client_id="efa6a305ca004ac0947bb74161223d66";
 	private final static String client_secret="a9a02107496f46bd9ef2c5f7470a1b46";
@@ -60,7 +61,7 @@ public class SpotifyApiServiceImpl implements SpotifyApiService {
 	 * Método responsável por retornar um Token de acess à API do Spotfy
 	 */
 	@Override
-	public Token getToken() {
+	public SpotifyTokenDTO getToken() {
 		if(token != null) {
 			return token;
 		}
@@ -75,7 +76,7 @@ public class SpotifyApiServiceImpl implements SpotifyApiService {
 			map.add("grant_type", "client_credentials");
 			
 			HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
-			token = restTemplate.postForObject( url, request , Token.class );
+			token = restTemplate.postForObject( url, request , SpotifyTokenDTO.class );
 			return token;
 		} catch (HttpStatusCodeException e) {
 			ResponseEntity response = new ResponseEntity<String>(e.getResponseBodyAsString(), e.getResponseHeaders(), e.getStatusCode());
@@ -88,10 +89,10 @@ public class SpotifyApiServiceImpl implements SpotifyApiService {
 	 * @param autorization
 	 * @return
 	 */
-	private HttpEntity<?> getEntityAutorization(String autorization) {
+	public HttpEntity<?> getHeader(String token) {
 		HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.add("Authorization", "Bearer "+autorization);
+        headers.add("Authorization", "Bearer "+token);
         
         HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
         return entity;
@@ -101,17 +102,16 @@ public class SpotifyApiServiceImpl implements SpotifyApiService {
 	 * Método que retorna a recomendação de album
 	 */
 	@Override
-	public Recomendation getRecomendations(String autorization, String genres) {
-		final String url = String.format("https://api.spotify.com/v1/recommendations?market=US&seed_genres=%s&limit=1", genres);
+	public SpotifyRecomendationDTO getRecomendations(String token, String genres) {
+		final String url = String.format("https://api.spotify.com/v1/recommendations?seed_genres=%s&limit=1", genres);
 
 	    RestTemplate restTemplate = new RestTemplate();
 	    try {
 	    	
-	        ResponseEntity<Recomendation> response = restTemplate.exchange(url, HttpMethod.GET, getEntityAutorization(autorization), Recomendation.class);
+	        ResponseEntity<SpotifyRecomendationDTO> response = restTemplate.exchange(url, HttpMethod.GET, getHeader(token), SpotifyRecomendationDTO.class);
 	        return response.getBody();
 	    } catch (HttpStatusCodeException e) {
 			ResponseEntity response = new ResponseEntity<String>(e.getResponseBodyAsString(), e.getResponseHeaders(), e.getStatusCode());
-			// TODO Implementar algum tratamento
 			throw e;
 		}
 	}
@@ -120,20 +120,39 @@ public class SpotifyApiServiceImpl implements SpotifyApiService {
 	 * Método responsável por retornar as músicas de um album
 	 */
 	@Override
-	public Album getTracks(String autorization, String albumId) {
+	public SpotifyAlbumDTO getAlbumItems(String token, String albumId) {
 		final String url = String.format("https://api.spotify.com/v1/albums/%s/tracks", albumId);
 
 	    RestTemplate restTemplate = new RestTemplate();
 	    try {
 	    	
-	        ResponseEntity<Album> response = restTemplate.exchange(url, HttpMethod.GET, getEntityAutorization(autorization), Album.class);
+	        ResponseEntity<SpotifyAlbumDTO> response = restTemplate.exchange(url, HttpMethod.GET, getHeader(token), SpotifyAlbumDTO.class);
 	        return response.getBody();
 	    } catch (HttpStatusCodeException e) {
 			ResponseEntity response = new ResponseEntity<String>(e.getResponseBodyAsString(), e.getResponseHeaders(), e.getStatusCode());
-			// TODO Implementar algum tratamento
 			throw e;
 		}
 	}
+
+	/**
+	 * Método utilizado para retornar somente as músicas para a resposta da API
+	 */
+	@Override
+	public List<SpotifyItemDTO> getTracks(String genre) {
+		// Verifica o Token
+		final String token = getToken().getAccessToken();
+
+		// Busca um algum de recomendações a partir do gênero 
+		final SpotifyRecomendationDTO responseRecomendationDTO =  getRecomendations(token, genre);
+		final List<SpotifyTrackDTO> tracks = responseRecomendationDTO.getTracks();
+		SpotifyAlbumDTO album = tracks.get(0).getAlbum();
+		
+		// Busca as musicas a partir de um album
+		album.setItems(getAlbumItems(token, album.getId()).getItems());
+
+		return album.getItems();
+	}
+	
 
 	@Override
 	public boolean tokenIsNull() {

@@ -1,6 +1,4 @@
-package com.ribeiro.spotify.api.dto;
-
-import java.util.List;
+package com.ribeiro.softFocusApi.model.resouce.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -15,11 +13,18 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Album {
+public class SpotifyItemDTO {
 
     @JsonProperty("id")
     private String id;
 
-    @JsonProperty("items")
-    private List<Item> items;
+    @JsonProperty("track_number")
+    private Integer number;
+
+    @JsonProperty("name")
+    private String name;
+    
+    @JsonProperty("duration_ms")
+    private Long duration;
+
 }

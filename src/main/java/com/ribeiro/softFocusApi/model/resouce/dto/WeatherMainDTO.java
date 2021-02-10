@@ -11,7 +11,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class MainWeatherDTO {
+public class WeatherMainDTO {
 
 	private Double temp;
 	private Integer humidity;

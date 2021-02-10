@@ -3,7 +3,7 @@ package com.ribeiro.softFocusApi.service.impl;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.ribeiro.softFocusApi.model.resouce.dto.ResponseWeatherDTO;
+import com.ribeiro.softFocusApi.model.resouce.dto.WeatherResponseDTO;
 
 public class OpenWeatherMapsServiceImplIntegrationTest {
 	
@@ -15,7 +15,7 @@ public class OpenWeatherMapsServiceImplIntegrationTest {
 		String city = "Recife";
 
 		// when
-		final ResponseWeatherDTO responseDTO = service.callOpenweathermapAPI(city);
+		final WeatherResponseDTO responseDTO = service.callOpenweathermapAPI(city);
 
 		// then
 		Assertions.assertThat(responseDTO.getCity())
