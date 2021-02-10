@@ -18,6 +18,8 @@ import com.ribeiro.spotify.api.dto.Album;
 import com.ribeiro.spotify.api.dto.Recomendation;
 import com.ribeiro.spotify.api.dto.Token;
 
+import lombok.NoArgsConstructor;
+
 /**
  * Classe que implementa a API do Spotfy (https://developer.spotify.com/documentation/web-api/)
  * 
@@ -26,15 +28,15 @@ import com.ribeiro.spotify.api.dto.Token;
  *
  */
 @Service
-public class SpotifyApiServiceImpl implements SpotfyApiService {
-	
-	private final static String client_id="efa6a305ca004ac0947bb74161223d66";
-	private final static String client_secret="a9a02107496f46bd9ef2c5f7470a1b46";
-	private final static String redirect_url="http://localhost:8080/callback";
+public class SpotifyApiServiceImpl implements SpotifyApiService {
 	
 //	private static SpotifyApiImpl unique;
 	
 	private Token token;
+	
+	private final static String client_id="efa6a305ca004ac0947bb74161223d66";
+	private final static String client_secret="a9a02107496f46bd9ef2c5f7470a1b46";
+	private final static String redirect_url="http://localhost:8080/callback";
 	
 	/**
 	 * Retorna o client_id e client_secret no padrão Base64
@@ -48,14 +50,17 @@ public class SpotifyApiServiceImpl implements SpotfyApiService {
 	 * Método responsável por obter uma autorização de acesso
 	 * @return
 	 */
+	@Override
 	public String getAuthorizationUrl() {
-		return String.format("https://accounts.spotify.com/authorize?response_type=code&redirect_uri=%s&client_id=%s",redirect_url,client_id);
+		// https://accounts.spotify.com/authorize?response_type=code&redirect_uri=http://localhost:8080/callback&client_id=efa6a305ca004ac0947bb74161223d66
+		return String.format("https://accounts.spotify.com/authorize?response_type=code&redirect_uri=%s&client_id=%s", redirect_url, client_id);
 	}
 	
 	/**
 	 * Método responsável por retornar um Token de acess à API do Spotfy
 	 */
-	public Token getToken(String autorization) {
+	@Override
+	public Token getToken() {
 		if(token != null) {
 			return token;
 		}
@@ -65,15 +70,12 @@ public class SpotifyApiServiceImpl implements SpotfyApiService {
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 			headers.add("Authorization", "Basic "+getEncoded64());
+
 			MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
-			
-			map.add("grant_type", "authorization_code");
-			map.add("code", autorization);
-			map.add("redirect_uri", redirect_url);
+			map.add("grant_type", "client_credentials");
 			
 			HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
 			token = restTemplate.postForObject( url, request , Token.class );
-			token.setData(new Date());
 			return token;
 		} catch (HttpStatusCodeException e) {
 			ResponseEntity response = new ResponseEntity<String>(e.getResponseBodyAsString(), e.getResponseHeaders(), e.getStatusCode());
@@ -98,6 +100,7 @@ public class SpotifyApiServiceImpl implements SpotfyApiService {
 	/**
 	 * Método que retorna a recomendação de album
 	 */
+	@Override
 	public Recomendation getRecomendations(String autorization, String genres) {
 		final String url = String.format("https://api.spotify.com/v1/recommendations?market=US&seed_genres=%s&limit=1", genres);
 
@@ -116,6 +119,7 @@ public class SpotifyApiServiceImpl implements SpotfyApiService {
 	/**
 	 * Método responsável por retornar as músicas de um album
 	 */
+	@Override
 	public Album getTracks(String autorization, String albumId) {
 		final String url = String.format("https://api.spotify.com/v1/albums/%s/tracks", albumId);
 

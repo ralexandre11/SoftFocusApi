@@ -4,7 +4,7 @@ import com.ribeiro.spotify.api.dto.Album;
 import com.ribeiro.spotify.api.dto.Recomendation;
 import com.ribeiro.spotify.api.dto.Token;
 
-public interface SpotfyApiService {
+public interface SpotifyApiService {
 
 	/**
 	 * Método responsável por obter uma autorização de acesso
@@ -16,7 +16,7 @@ public interface SpotfyApiService {
 	/**
 	 * Método responsável por retornar um Token de acess à API do Spotfy
 	 */
-	public Token getToken(String autorization);
+	public Token getToken();
 
 	/**
 	 * Método que retorna a recomendação de album
@@ -29,5 +29,5 @@ public interface SpotfyApiService {
 	public Album getTracks(String autorization, String albumId);
 
 	public boolean tokenIsNull();
-
+	
 }

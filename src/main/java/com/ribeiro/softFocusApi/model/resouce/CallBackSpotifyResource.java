@@ -1,9 +1,10 @@
 package com.ribeiro.softFocusApi.model.resouce;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ribeiro.spotify.api.dto.Token;
@@ -13,16 +14,26 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping(value = "/callback")
 public class CallBackSpotifyResource {
 	
-	SpotifyApiServiceImpl spotify = SpotifyApiServiceImpl.getInstance();
+//	@Autowired
+//	private final SpotifyApiServiceImpl spotify;
 
-	@RequestMapping(value = "/callback/{code}", method = RequestMethod.GET)
-	public ResponseEntity<Token> callback(@PathVariable final String code) {
+//	@GetMapping
+//	public ResponseEntity<String> testCallback() {
+//		final String testResponse = new String("OK");
+//		return ResponseEntity.ok().body(testResponse);
+//	}
+	
+//	@RequestMapping(value = "/{code}", method = RequestMethod.GET)
+	@GetMapping
+	public ResponseEntity<Token> callback(@RequestParam(defaultValue = "empty") String code) {
 		
-		Token token = spotify.getToken(code);
+		Token token = new Token();
 		
-		System.out.println(token);
+//		System.out.printf("Code: %s", code);
+//		System.out.printf("Token: %s", token);
 		return ResponseEntity.ok().body(token);
 	}
 	

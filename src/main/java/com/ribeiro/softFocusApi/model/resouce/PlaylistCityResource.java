@@ -11,7 +11,6 @@ import com.ribeiro.softFocusApi.model.repository.LogRequestRepository;
 import com.ribeiro.softFocusApi.model.resouce.dto.ResponseWeatherDTO;
 import com.ribeiro.softFocusApi.service.LogRequestService;
 import com.ribeiro.softFocusApi.service.OpenWeatherMapsService;
-import com.ribeiro.spotify.api.service.SpotifyApiServiceImpl;
 
 import lombok.RequiredArgsConstructor;
 
@@ -41,15 +40,17 @@ public class PlaylistCityResource {
 	 */
 	@GetMapping(value = "/{city}")
 	public ResponseEntity<LogRequestRepository> checkWeather(@PathVariable final String city) {
+		// Call Weater API
 		ResponseWeatherDTO responseDTO = new ResponseWeatherDTO();
-		// Call API
 		responseDTO = Weaterservice.callOpenweathermapAPI(city);
 		// Save Log Request
 		LogRequestRepository logRequest = (LogRequestRepository) logRequestService.Save(responseDTO);
 		
-//		if(spotify.tokenIsNull()) {
-//			// redirect	spotify.getAuthorizationUrl()
-//		}
+		
+		// Call Spotify API
+
+		
+		
 		return ResponseEntity.ok().body(logRequest);
 	}
 
